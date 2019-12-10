@@ -1,0 +1,24 @@
+{
+  "name": "hackday2019",
+  "version": "1.0.0",
+  "description": "tyottyune~",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yokoh-Gushiken/hackday2019.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yokoh-Gushiken/hackday2019/issues"
+  },
+  "homepage": "https://github.com/Yokoh-Gushiken/hackday2019#readme",
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  }
+}
