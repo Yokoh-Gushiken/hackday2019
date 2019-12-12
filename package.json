@@ -1,0 +1,44 @@
+{
+  "name": "hackday2019",
+  "version": "1.0.0",
+  "description": "tyottyune~",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yokoh-Gushiken/hackday2019.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yokoh-Gushiken/hackday2019/issues"
+  },
+  "homepage": "https://github.com/Yokoh-Gushiken/hackday2019#readme",
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/register": "^7.7.4",
+    "babel-loader": "^8.0.6",
+    "babel-preset-vue": "^2.0.2",
+    "css-loader": "^3.3.0",
+    "html-webpack-plugin": "^3.2.0",
+    "node-fetch": "^2.6.0",
+    "path": "^0.12.7",
+    "vue-loader": "^15.7.2",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "dependencies": {
+    "mout": "^1.2.2",
+    "vue": "^2.6.10",
+    "vue-cli": "^2.9.6",
+    "vue-router": "^3.1.3"
+  }
+}
