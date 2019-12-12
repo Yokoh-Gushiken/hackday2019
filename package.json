@@ -4,6 +4,7 @@
   "description": "tyottyune~",
   "private": true,
   "scripts": {
+    "clean": "rm -rf dist",
     "build": "webpack",
     "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
