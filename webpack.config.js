@@ -8,7 +8,7 @@ module.exports = {
   mode:'development',
   entry: './src/app/app.js',
   output: {
-    filename: 'app.min.js',
+    filename: 'app.js',
     path: resolve(__dirname, 'dist/'),
   },
   devServer: {
