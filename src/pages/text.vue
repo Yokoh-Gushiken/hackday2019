@@ -3,15 +3,35 @@
     <div class="text__wrapper">
       <div class="text__container">
         <div class="text__areawrap">
-          <textarea name="name" maxlength="140"></textarea>
+          <textarea name="name" maxlength="140" v-model:trim="message"></textarea>
         </div>
         <div class="text__buttonWrap">
-          <router-link to="text-result" class="text__button"></router-link>
+          <div class="text__button" v-bind:class="{'text__button--inactive': !nextFlag}">
+            <router-link v-if="nextFlag" to="text-result" class="text__link"></router-link>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      message: '',
+      nextFlag: false,
+    }
+  },
+
+  updated: function() {
+    if (this.message.length > 0) {
+      this.nextFlag = true;
+    }
+  },
+}
+
+</script>
 
 <style>
 .text__wrapper {
@@ -39,11 +59,12 @@ textarea{
   padding: 5px;
   border-radius: 5px;
   border: 50px solid #333;
+  outline: none;
 }
 
 .text__buttonWrap {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   margin-top: 50px;
 }
@@ -56,6 +77,16 @@ textarea{
   background-position: center center;
   background-color: #333;
   background-size: 30px 30px;
+}
+
+.text__button--inactive {
+  background-color: #ddd;
+}
+
+.text__link {
+  display: block;
+  width: 100%;
+  height: 100%;
   text-decoration: none;
 }
 </style>
