@@ -23,11 +23,7 @@
 
 <script>
   export default {
-    name: 'top',
-    
-    created() {
-      console.log(this.$store.getters.getTest);
-    }
+    name: 'top'
   }
 </script>
 
@@ -83,9 +79,5 @@
 .Top__cover--right {
   right: -50%;
   transition: right 1s ease;
-}
-
-.Top__coverDesc {
-
 }
 </style>

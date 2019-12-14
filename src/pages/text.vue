@@ -3,11 +3,12 @@
     <div class="text__wrapper">
       <div class="text__container">
         <div class="text__areawrap">
-          <textarea name="name" maxlength="140" v-model:trim="message"></textarea>
+          <textarea name="name" maxlength="140" v-model.trim="message"></textarea>
         </div>
         <div class="text__buttonWrap">
           <div class="text__button" v-bind:class="{'text__button--inactive': !nextFlag}">
             <router-link v-if="nextFlag" to="text-result" class="text__link"></router-link>
+            <button v-on:click="handlePostText" class="text__button"></button>
           </div>
         </div>
       </div>
@@ -31,8 +32,19 @@ export default {
       this.nextFlag = false;
     }
   },
-}
 
+  methods: {
+    handlePostText() {
+      return this.$store.dispatch('postText', { 
+        'message': 'ffffff'
+        })
+      .then(() => {
+        this.$router.push({ path: '/text-result' })
+      })
+      .catch();
+    }
+  }
+}
 </script>
 
 <style>

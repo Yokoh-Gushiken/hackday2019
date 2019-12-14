@@ -6,12 +6,12 @@
 
 <script>
   export default {
-    name: 'app',
+    name: 'app'
     
-    created() {
-      this.$store.dispatch('test', {
-        'message': '今度はあいつを殺す。刑務所行きだ。'
-      });
-    }
+    // created() {
+    //   this.$store.dispatch('text', {
+    //     'message': '今度はあいつを殺す。刑務所行きだ。'
+    //   });
+    // }
   }
 </script>

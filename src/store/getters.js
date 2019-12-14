@@ -1,3 +1,3 @@
 export default {
-  getTest: state => state.test
+  text: state => state.text
 }

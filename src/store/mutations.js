@@ -1,5 +1,5 @@
 export default {
-  test (state, payload) {
-    state.test = payload.text;
+  text (state, payload) {
+    state.text = payload.text;
   }
 }
