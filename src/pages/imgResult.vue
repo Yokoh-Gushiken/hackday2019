@@ -7,8 +7,8 @@
             <img src="https://dummyimage.com/600x400/000/fff">
           </div>
           <div class="imgResult__scoreContainer">
-            <score text="POSI" :score="posiScore"></score>
-            <score text="NEGA" :score="negaScore"></score>
+            <result text="POSI SCORE" :result="posiScore"></result>
+            <result text="NEGA SCORE" :result="negaScore"></result>
           </div>
         </div>
         <lemon-lylic></lemon-lylic>
@@ -29,11 +29,11 @@
 </template>
 
 <script>
-import Score from '../components/score.vue';
+import Result from '../components/result.vue';
 import LemonLylic from '../components/lemonLylic.vue';
 export default {
   components: {
-    Score,
+    Result,
     LemonLylic,
   },
 
