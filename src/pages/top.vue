@@ -5,3 +5,13 @@
         <router-link to="yoko">Go to yoko</router-link>
     </div>
 </template>
+
+<script>
+  export default {
+    name: 'top',
+    
+    created() {
+      console.log(this.$store.getters.getTest);
+    }
+  }
+</script>
