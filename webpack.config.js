@@ -39,6 +39,10 @@ module.exports = {
           "css-loader"
         ],
       },
+      {
+        test: /\.(gif|png|jpg|eot|wof|woff|woff2|ttf|svg)$/,
+        loader: "url-loader"
+      },
     ]
   },
   resolve: {
