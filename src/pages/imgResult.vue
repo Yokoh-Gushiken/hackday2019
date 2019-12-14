@@ -4,17 +4,17 @@
       <div class="imgResult__container">
         <div class="imgResult__originAndScore">
           <div class="imgResult__imgContainer">
-            <img src="https://dummyimage.com/600x400/000/fff">
+            <img :src="`${originImg}`" v-bind:class="{'imgResult__img--wide': originImgWide, 'imgResult__img--tall': !originImgWide}">
           </div>
           <div class="imgResult__scoreContainer">
-            <result text="POSI SCORE" :result="posiScore"></result>
-            <result text="NEGA SCORE" :result="negaScore"></result>
+            <result text="CATEGORY" :result="category"></result>
+            <result text="SCORE" :result="score"></result>
           </div>
         </div>
         <lemon-lylic></lemon-lylic>
         <div class="imgResult__newAndBtn">
           <div class="imgResult__imgContainer">
-            <img src="https://dummyimage.com/600x400/000/fff">
+            <img :src="`${newImg}`" v-bind:class="{'imgResult__img--wide': newImgWide, 'imgResult__img--tall': !newImgWide}">
           </div>
           <div class="imgResult__btnContainer">
             <div class="imgResult__btn">SHARE</div>
@@ -39,9 +39,13 @@ export default {
 
   data() {
     return {
-      nega: true, // api叩いた結果の真偽(一旦ベタ)
-      posiScore: '50', // べ
-      negaScore: '50', // べ
+      nega: true, // TODO:api叩いた結果の真偽(一旦ベタ)
+      category: 'VIORENCE', // TODO
+      score: '70', // TODO
+      originImg: 'https://dummyimage.com/200x400/000/fff', //TODO
+      newImg: 'https://dummyimage.com/600x400/000/fff', //TODO
+      originImgWide: false,
+      newImgWide: false,
     }
   },
 
@@ -49,6 +53,8 @@ export default {
     if (this.nega) {
       this.yumeAnim(); 
     }
+    this.imgSize(this.originImg, 'this.originImgWide');
+    this.imgSize(this.newImg, 'this.newImgWide');
   },
 
   methods: {
@@ -62,14 +68,34 @@ export default {
           chara.classList.add('LemonLylic__text');
         }, 150 * i);
       });
-    }
+    },
+    imgSize(path, flag) {
+      const element = new Image();
+      element.onload = function() {
+        const imgWidth = element.naturalWidth;
+        const imgHeight = element.naturalHeight;
+        if (imgWidth > imgHeight) {
+          console.log('test');
+          flag = true;
+        } else {
+          flag = false;
+        }
+        console.log(imgWidth);
+        console.log(imgHeight);
+      }
+      element.src = path;
+    },
   }
 }
 
 </script>
 
 <style>
-img {
+.imgResult__img--wide {
+  width: 100%;
+}
+
+.imgResult__img--tall {
   height: 100%;
 }
 
@@ -92,6 +118,7 @@ img {
 }
 
 .imgResult__imgContainer {
+  width: 50%;
   height: 30vh;
   display: flex;
   align-items: center;
@@ -101,7 +128,7 @@ img {
 
 .imgResult__scoreContainer {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-evenly;
   flex-direction: column;
 }
