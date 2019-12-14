@@ -46,7 +46,6 @@
 
 .Top__mainBtn {
   font-size: 108px;
-  font-family: 'arial black';
 }
 
 .Top__link {
