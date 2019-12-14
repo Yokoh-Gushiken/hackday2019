@@ -21,6 +21,16 @@
   </div>
 </template>
 
+<script>
+  export default {
+    name: 'top',
+    
+    created() {
+      console.log(this.$store.getters.getTest);
+    }
+  }
+</script>
+
 <style>
 .Top__wrapper {
   display: flex;

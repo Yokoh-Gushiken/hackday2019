@@ -3,3 +3,15 @@
     <router-view></router-view>
   </div>
 </template>
+
+<script>
+  export default {
+    name: 'app',
+    
+    created() {
+      this.$store.dispatch('test', {
+        'message': '今度はあいつを殺す。刑務所行きだ。'
+      });
+    }
+  }
+</script>
