@@ -6,7 +6,7 @@
           <textarea name="name" maxlength="140"></textarea>
         </div>
         <div class="text__buttonWrap">
-          <router-link to="text-result" class="text__button">テキスト結果</router-link>
+          <router-link to="text-result" class="text__button"></router-link>
         </div>
       </div>
     </div>
@@ -49,11 +49,13 @@ textarea{
 }
 
 .text__button { 
-  width: 20%;
-  padding: 16px;
-  text-align: center;
+  height: 56px;
+  width: 25%;
+  background-image: url(../../img/arrow-white.png);
+  background-repeat: no-repeat;
+  background-position: center center;
   background-color: #333;
-  color: #fff;
+  background-size: 30px 30px;
   text-decoration: none;
 }
 </style>
