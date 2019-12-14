@@ -27,6 +27,8 @@ export default {
   updated: function() {
     if (this.message.length > 0) {
       this.nextFlag = true;
+    } else {
+      this.nextFlag = false;
     }
   },
 }
