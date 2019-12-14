@@ -7,17 +7,11 @@
             <img src="https://dummyimage.com/600x400/000/fff">
           </div>
           <div class="imgResult__scoreContainer">
-            <div class="imgResult__score">
-              <div class="imgResult__text">POSI SCORE</div>
-              <div class="imgResult__text imgResult__text--right"><span class="imgResult__num">50</span>%</div>
-            </div>
-            <div class="imgResult__score">
-              <div class="imgResult__text">NEGA SCORE</div>
-              <div class="imgResult__text imgResult__text--right"><span class="imgResult__num">50</span>%</div>
-            </div>
+            <score text="POSI" :score="posiScore"></score>
+            <score text="NEGA" :score="negaScore"></score>
           </div>
         </div>
-        <div class="imgResult__yume"><span>夢</span><span>な</span><span>ら</span><span>ば</span><span>ど</span><span>れ</span><span>ほ</span><span>ど</span><span>良</span><span>か</span><span>っ</span><span>た</span><span>で</span><span>し</span><span>ょ</span><span>う</span><span>...</span></div>
+        <lemon-lylic></lemon-lylic>
         <div class="imgResult__newAndBtn">
           <div class="imgResult__imgContainer">
             <img src="https://dummyimage.com/600x400/000/fff">
@@ -35,26 +29,43 @@
 </template>
 
 <script>
-window.addEventListener('DOMContentLoaded', (event) => {
-  let nega = true; // ネガポジ判定結果をここに
-  if (nega) {
-    yumeAnim();
+import Score from '../components/score.vue';
+import LemonLylic from '../components/lemonLylic.vue';
+export default {
+  components: {
+    Score,
+    LemonLylic,
+  },
+
+  data() {
+    return {
+      nega: true, // api叩いた結果の真偽(一旦ベタ)
+      posiScore: '50', // べ
+      negaScore: '50', // べ
+    }
+  },
+
+  mounted: function() {
+    if (this.nega) {
+      this.yumeAnim(); 
+    }
+  },
+
+  methods: {
+    yumeAnim() { // 一旦ここに書いてる
+      const text = document.querySelector('.LemonLylic');
+      console.log('aaa', text);
+      text.style.visibility = 'visible';
+      const character = text.querySelectorAll('span');
+      character.forEach((chara, i) => {
+        setTimeout(() => {
+          chara.classList.add('LemonLylic__text');
+        }, 150 * i);
+      });
+    }
   }
-});
+}
 
-const scoreAnim = () => {
-};
-
-const yumeAnim = () => {
-  const text = document.querySelector('.imgResult__yume');
-  text.style.visibility = 'visible';
-  const character = text.querySelectorAll('span');
-  character.forEach((chara, i) => {
-    setTimeout(() => {
-      chara.classList.add('imgResult__yumeText');
-    }, 150 * i);
-  });
-};
 </script>
 
 <style>
@@ -93,37 +104,6 @@ img {
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
-}
-
-.imgResult__score {
-}
-
-.imgResult__text {
-  font-size: 1.4rem;
-  text-align: right;
-}
-
-.imgResult__text--right {
-}
-
-.imgResult__num {
-  font-size: 2.4rem;
-  font-weight: bold;
-}
-
-.imgResult__yume {
-  visibility: hidden;
-  margin-top: 30px;
-  font-size: 2.4rem;
-  text-align: center;
-}
-
-.imgResult__yume span {
-  opacity: 0;
-}
-
-.imgResult__yumeText {
-  animation: fadeIn 0.5s linear forwards;
 }
 
 .imgResult__newAndBtn {
