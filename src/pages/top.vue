@@ -17,13 +17,18 @@
           <div class="Top__coverDesc">画像をみる的文言</div>
         </div>
       </div>
+      <!--<div class="Top__slash">／</div>-->
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'top'
+    name: 'top',
+    
+    created() {
+      console.log(this.$store.getters.getTest);
+    }
   }
 </script>
 
@@ -33,6 +38,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow: hidden;
 }
 
 .Top__twocolumn {
@@ -51,7 +57,7 @@
 }
 
 .Top__mainBtn {
-  font-size: 108px;
+  font-size: 6.4rem;
 }
 
 .Top__link {
@@ -79,5 +85,14 @@
 .Top__cover--right {
   right: -50%;
   transition: right 1s ease;
+}
+
+.Top__coverDesc {
+
+}
+
+.Top__slash {
+  position: absolute;
+  font-size: 8.6rem;
 }
 </style>
