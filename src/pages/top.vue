@@ -24,11 +24,7 @@
 
 <script>
   export default {
-    name: 'top',
-    
-    created() {
-      console.log(this.$store.getters.getTest);
-    }
+    name: 'top'
   }
 </script>
 

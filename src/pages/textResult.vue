@@ -73,12 +73,12 @@ export default {
 
   data() {
     return {
-      nega: true, // api叩いた結果の真偽(一旦ベタ)
+      nega: false, // api叩いた結果の真偽(一旦ベタ)
       superNega: false, // TODO
-      posiScore: '50', // べ
-      negaScore: '50', // べ
-      originText: 'tesssssssssssssssssssssssssssssssssssssssssssssssssssstteatea',
-      newText: 'lemonlemonefmlomeomooookoelomeomoooeleoeleleleleoemo',
+      posiScore: 0, // べ
+      negaScore: 0, // べ
+      originText: this.$store.getters.text,
+      newText: this.$store.getters.text,
       message: '',
       sNegaMessage: 'あなたが入力した文章はコレでしたよね？？',
       scoreAnimFlag: false,
@@ -92,10 +92,17 @@ export default {
   },
 
   mounted: function() {
-    if (this.nega) {
-      this.message = 'ねが的文言'
+    this.posiScore = Math.floor(this.$store.getters.positive * 100);
+    this.negaScore = Math.floor(this.$store.getters.negative * 100);
+    
+    if (this.negaScore >= 90){
+      this.superNega = true;
+    }
+    else if (this.negaScore < 90 && this.negaScore >= 80) {
+      this.nega = true;
+      this.message = 'LOSERになりかけてませんか？'
     } else {
-      this.message = 'そのままtweetしていいよ的文言'
+      this.message = 'そのままtweetしなよっ！'
     }
 
     new Promise((resolve) => {

@@ -36,7 +36,7 @@ export default {
   methods: {
     handlePostText() {
       return this.$store.dispatch('postText', { 
-        'message': 'ffffff'
+        'message': this.message
         })
       .then(() => {
         this.$router.push({ path: '/text-result' })
