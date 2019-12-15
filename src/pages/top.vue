@@ -17,6 +17,7 @@
           <div class="Top__coverDesc">画像をみる的文言</div>
         </div>
       </div>
+      <!--<div class="Top__slash">／</div>-->
     </div>
   </div>
 </template>
@@ -37,6 +38,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow: hidden;
 }
 
 .Top__twocolumn {
@@ -55,7 +57,7 @@
 }
 
 .Top__mainBtn {
-  font-size: 108px;
+  font-size: 6.4rem;
 }
 
 .Top__link {
@@ -87,5 +89,10 @@
 
 .Top__coverDesc {
 
+}
+
+.Top__slash {
+  position: absolute;
+  font-size: 8.6rem;
 }
 </style>
