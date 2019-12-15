@@ -2,7 +2,7 @@
   <div id="textResult">
     <div class="textResult__wrapper">
       <div class="textResult__container">
-        <div class="textResult__originAndScore">
+        <div class="textResult__originAndScore" v-bind:class="{'textResult__originAndScore--fadeOut': sNegaAnimFinished}">
           <div class="textResult__textContainer">
             <div class="textResult__text">{{originText}}</div>
           </div>
@@ -11,26 +11,50 @@
             <result text="NEGA SCORE" :result="negaScore"></result>
           </div>
         </div>
-        <div class="textResult__message" v-bind:class="{'textResult__message--fadeIn': messageAnimFlag}">{{message}}</div>
-        <div class="textResult__posiContent" v-bind:class="{'textResult__posiContent--inactive': nega, 'textResult__posiContent--fadeIn': posiContentAnimFlag}">
-          <div class="textResult__btnContainer">
-            <div class="textResult__btn">SHARE</div>
-            <router-link to="/" class="textResult__link">
-              <div class="textResult__btn">HOME</div>
-            </router-link>
-          </div>
-        </div>
-        <div class="textResult__negaContent" v-bind:class="{'textResult__negaContent--inactive': !nega, 'textResult__negaContent--fadeIn': negaContentAnimFlag}">
-          <div class="textResult__newAndBtn">
-            <div class="textResult__textContainer">
-              <div class="textResult__text">{{newText}}</div>
-            </div>
-            <div class="textResult__btnContainer textResult__btnContainer--nega">
+        <div class="textResult__normalContent" v-if="!superNega">
+          <div class="textResult__message" v-bind:class="{'textResult__message--fadeIn': messageAnimFlag}">{{message}}</div>
+          <div class="textResult__posiContent" v-bind:class="{'textResult__posiContent--inactive': nega, 'textResult__posiContent--fadeIn': posiContentAnimFlag}">
+            <div class="textResult__btnContainer">
               <div class="textResult__btn">SHARE</div>
               <router-link to="/" class="textResult__link">
                 <div class="textResult__btn">HOME</div>
               </router-link>
             </div>
+          </div>
+          <div class="textResult__negaContent" v-bind:class="{'textResult__negaContent--inactive': !nega, 'textResult__negaContent--fadeIn': negaContentAnimFlag}">
+            <div class="textResult__newAndBtn">
+              <div class="textResult__textContainer">
+                <div class="textResult__text">{{newText}}</div>
+              </div>
+              <div class="textResult__btnContainer textResult__btnContainer--nega">
+                <div class="textResult__btn">SHARE</div>
+                <router-link to="/" class="textResult__link">
+                  <div class="textResult__btn">HOME</div>
+                </router-link>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="textResult__superNegaContent" v-if="superNega && !sNegaAnimFinished" v-bind:class="{'textResult__superNegaContent--fadeIn': superNegaContentAnimFlag}">
+          <div class="textResult__lylic" v-bind:class="{'textResult__lylic--fadeOut': sNegaAnimFinished}">
+            <lemon-lylic></lemon-lylic>
+          </div>
+<!--
+          <audio>
+            <source src="../../audio/lemon_mp3.mp3" type="audio/mp3" controls>
+          </audio>
+-->
+        </div>
+        <div class="textResult__superNegaResult" v-if="sNegaAnimFinished" v-bind:class="{'textResult__superNegaResult--fadeIn': superNegaResultAnimFlag}">
+          <div class="textResult__sNegaMessage">{{sNegaMessage}}</div>
+          <div class="textResult__sNegaTextContainer">
+            <div class="textResult__text">{{newText}}</div>
+          </div>
+          <div class="textResult__btnContainer textResult__btnContainer--sNega">
+            <div class="textResult__btn">SHARE</div>
+            <router-link to="/" class="textResult__link">
+              <div class="textResult__btn">HOME</div>
+            </router-link>
           </div>
         </div>
       </div>
@@ -49,17 +73,21 @@ export default {
 
   data() {
     return {
-      nega: false, // api叩いた結果の真偽(一旦ベタ)
+      nega: true, // api叩いた結果の真偽(一旦ベタ)
       superNega: false, // TODO
       posiScore: '50', // べ
       negaScore: '50', // べ
       originText: 'tesssssssssssssssssssssssssssssssssssssssssssssssssssstteatea',
       newText: 'lemonlemonefmlomeomooookoelomeomoooeleoeleleleleoemo',
       message: '',
+      sNegaMessage: 'あなたが入力した文章はコレでしたよね？？',
       scoreAnimFlag: false,
       messageAnimFlag: false,
       posiContentAnimFlag: false,
       negaContentAnimFlag: false,
+      superNegaContentAnimFlag: false,
+      superNegaResultAnimFlag: false,
+      sNegaAnimFinished: false,
     }
   },
 
@@ -78,19 +106,26 @@ export default {
     .then((resolve) => {
       return new Promise((resolve) => {
         setTimeout(() => {
-          this.messageAnim();
-          if (this.nega) {
-            this.negaContentAnim();
+          if (!this.superNega) {
+            this.messageAnim();
+            if (this.nega) {
+              resolve(this.negaContentAnim());
+            } else {
+              resolve(this.posiContentAnim());
+            }
           } else {
-            this.posiContentAnim();
+            resolve(this.superNegaContentAnim());
           }
         }, 2000);
       });
+    })
+    .then((resolve) => {
+      setTimeout(() => {
+        if (this.superNega) {
+          this.superNegaResultAnim();
+        }
+      }, 5000);
     });
-
-    if (this.superNega) {
-      this.yumeAnim(); 
-    }
   },
 
   methods: {
@@ -108,6 +143,16 @@ export default {
 
     negaContentAnim() {
       this.negaContentAnimFlag = true;
+    },
+
+    superNegaContentAnim() {
+      this.superNegaContentAnimFlag = true;
+      this.yumeAnim();
+    },
+
+    superNegaResultAnim() {
+      this.superNegaResultAnimFlag = true;
+      this.sNegaAnimFinished = true;
     },
 
     yumeAnim() { // 一旦ここに書いてる
@@ -149,6 +194,11 @@ img {
   justify-content: space-between;
 }
 
+.textResult__originAndScore--fadeOut {
+  animation: fadeOut 1s ease forwards;
+  display: none;
+}
+
 .textResult__textContainer {
   width: 50%;
   height: 30vh;
@@ -173,6 +223,9 @@ img {
 
 .textResult__scoreContainer--fadeIn {
   animation: fadeIn 1s ease forwards; 
+}
+
+.textResult__normalContent {
 }
 
 .textResult__message {
@@ -228,6 +281,12 @@ img {
   align-items: center;
 }
 
+.textResult__btnContainer--sNega {
+  align-items: center;
+  flex-direction: row;
+  margin-top: 50px;
+}
+
 .textResult__btn {
   width: 150px;
   height: 50px;
@@ -249,12 +308,80 @@ img {
   text-decoration: none;
 }
 
+.textResult__superNegaContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  color: #fff;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.textResult__superNegaContent--fadeIn {
+  animation: fadeInIncomplete 2s ease forwards;
+}
+
+.textResult__lylic {
+  display: block;
+}
+
+.textResult__lylic--fadeOut {
+  display: none;
+  animation: fadeOut 1s ease forwards;
+}
+
+.textResult__superNegaResult {
+  opacity: 0;
+}
+.textResult__superNegaResult--fadeIn {
+  animation: fadeIn 1s ease forwards;
+}
+
+.textResult__sNegaMessage {
+  text-align: center;
+  font-size: 2.4rem;
+}
+
+.textResult__sNegaTextContainer {
+  width: 100%;
+  height: 55vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #000;
+  margin-top: 20px;
+  word-break: break-all;
+  font-size: 3.2rem;
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
   }
   100% {
     opacity: 1;
+  }
+}
+@keyframes fadeInIncomplete {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 
