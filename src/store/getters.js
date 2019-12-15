@@ -1,3 +1,5 @@
 export default {
-  getTest: state => state.test
+  text: state => state.text,
+  negative: state => state.negative,
+  positive: state => state.positive
 }

@@ -1,11 +1,11 @@
-import { test } from '../api';
+import { text } from '../api';
 
 export default {
-  test: ({ commit }, word) => {
-    return test.getTest(word)
+  postText: ({ commit }, word) => {
+    return text.postText(word)
       .then(({ res }) => {
       console.log(res);
-        commit('test', res);
+        commit('text', res);
       })
       .catch();
   }

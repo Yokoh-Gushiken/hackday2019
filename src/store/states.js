@@ -1,3 +1,5 @@
 export default {
-  test: ''
+  text: '',
+  posotive: 0,
+  negative: 0
 }
